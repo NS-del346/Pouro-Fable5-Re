@@ -1,7 +1,7 @@
 # Pourō-Fable5 Re
 
-**App name:** Pourō  
-**Description:** A quiet hand-drip coffee brew guide and timer.
+- **App name:** Pourō
+- **Description:** A quiet hand-drip coffee brew guide and timer.
 
 ## Status
 
