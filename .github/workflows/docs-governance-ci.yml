@@ -1,0 +1,205 @@
+name: Docs Governance CI
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: docs-governance-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    name: docs-governance
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0
+        with:
+          fetch-depth: 0
+
+      - name: Validate changed-line whitespace
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          case "${GITHUB_EVENT_NAME}" in
+            pull_request)
+              base_sha="${{ github.event.pull_request.base.sha }}"
+              ;;
+            push)
+              base_sha="${{ github.event.before }}"
+              if [[ -z "${base_sha}" || "${base_sha}" =~ ^0+$ ]]; then
+                base_sha="$(git rev-list --max-parents=0 HEAD | tail -n 1)"
+              fi
+              ;;
+            workflow_dispatch)
+              base_sha="$(git rev-parse HEAD^ 2>/dev/null || git rev-parse HEAD)"
+              ;;
+            *)
+              echo "Unsupported event: ${GITHUB_EVENT_NAME}" >&2
+              exit 1
+              ;;
+          esac
+
+          echo "Checking diff from ${base_sha} to HEAD"
+          git diff --check "${base_sha}...HEAD"
+
+      - name: Parse YAML files
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          ruby <<'RUBY'
+          require "psych"
+
+          files = Dir
+            .glob("**/*.{yaml,yml}", File::FNM_DOTMATCH)
+            .select { |path| File.file?(path) }
+            .sort
+
+          abort "No YAML files found" if files.empty?
+
+          files.each do |file|
+            Psych.parse_file(file)
+            puts "YAML OK: #{file}"
+          end
+          RUBY
+
+      - name: Validate required governance files
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          required_files=(
+            "LICENSE"
+            "README.md"
+            ".github/pull_request_template.md"
+            ".github/workflows/docs-governance-ci.yml"
+            "docs/PROJECT_CHARTER.md"
+            "docs/CURRENT_STATUS.md"
+            "docs/SOURCE_OF_TRUTH_INDEX.md"
+            "docs/COMPLETION_CONTRACT.yaml"
+            "docs/PR_BACKLOG.yaml"
+          )
+
+          for file in "${required_files[@]}"; do
+            if [[ ! -f "${file}" ]]; then
+              echo "Missing required file: ${file}" >&2
+              exit 1
+            fi
+            echo "Required file OK: ${file}"
+          done
+
+      - name: Validate governance text safety
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          ruby <<'RUBY'
+          required_files = [
+            "LICENSE",
+            "README.md",
+            ".github/pull_request_template.md",
+            ".github/workflows/docs-governance-ci.yml",
+            "docs/PROJECT_CHARTER.md",
+            "docs/CURRENT_STATUS.md",
+            "docs/SOURCE_OF_TRUTH_INDEX.md",
+            "docs/COMPLETION_CONTRACT.yaml",
+            "docs/PR_BACKLOG.yaml"
+          ]
+
+          forbidden_true = /^\s*(auto_merge|merge_authorized|production_deploy_authorized):\s*true\s*(?:#.*)?$/
+          conflict_start = /^<<<<<<< /
+          conflict_end = /^>>>>>>> /
+          conflict_middle = /^=======$/
+
+          required_files.each do |file|
+            data = File.binread(file)
+
+            abort "NUL byte detected in #{file}" if data.include?("\0")
+
+            text = data.dup.force_encoding(Encoding::UTF_8)
+            abort "Invalid UTF-8 in #{file}" unless text.valid_encoding?
+
+            text.each_line.with_index(1) do |line, line_number|
+              normalized = line.delete_suffix("\n").delete_suffix("\r")
+
+              if normalized.match?(conflict_start) ||
+                 normalized.match?(conflict_end) ||
+                 normalized.match?(conflict_middle)
+                abort "Conflict marker detected: #{file}:#{line_number}"
+              end
+
+              if normalized.match?(forbidden_true)
+                abort "Forbidden authorization flag detected: #{file}:#{line_number}"
+              end
+            end
+
+            puts "Text safety OK: #{file}"
+          end
+          RUBY
+
+      - name: Validate Markdown links and fences
+        shell: bash
+        run: |
+          set -euo pipefail
+
+          ruby <<'RUBY'
+          require "pathname"
+
+          markdown_files = `git ls-files "*.md"`
+            .lines
+            .map(&:strip)
+            .reject(&:empty?)
+            .sort
+
+          link_pattern = /\[[^\]]+\]\(([^)]+)\)/
+
+          markdown_files.each do |file|
+            text = File.read(file, encoding: "UTF-8")
+
+            fence_count = text.each_line.count do |line|
+              line.lstrip.start_with?("```")
+            end
+
+            if fence_count.odd?
+              abort "Unbalanced fenced code blocks: #{file}"
+            end
+
+            text.scan(link_pattern).flatten.each do |raw_target|
+              target = raw_target.strip
+              target = target.split(/[[:space:]]+["']/, 2).first
+              target = target.delete_prefix("<").delete_suffix(">")
+
+              next if target.empty?
+              next if target.start_with?("#")
+              next if target.match?(%r{\Ahttps?://}i)
+              next if target.match?(%r{\Amailto:}i)
+
+              path = target.split(/[?#]/, 2).first
+              next if path.nil? || path.empty?
+
+              resolved = Pathname
+                .new(File.dirname(file))
+                .join(path)
+                .cleanpath
+
+              unless File.exist?(resolved.to_s)
+                abort "Broken relative link: #{file} -> #{target} (resolved: #{resolved})"
+              end
+
+              puts "Link OK: #{file} -> #{target}"
+            end
+
+            puts "Markdown structure OK: #{file}"
+          end
+          RUBY
