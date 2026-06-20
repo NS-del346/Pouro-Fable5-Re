@@ -1,5 +1,11 @@
 # Project Charter
 
+This charter is a high-level Project and Lifecycle Charter. It is **not** a detailed domain
+specification. Detailed Feature Scope, Recipe Truth, Storage, Backup/Export/Import, UI, PWA,
+and related specifications are governed by their dedicated Authorities recorded in
+[docs/SOURCE_OF_TRUTH_INDEX.md](SOURCE_OF_TRUTH_INDEX.md). Where a domain is named below, this
+charter records direction and defers exact values to that domain's Authority.
+
 ## 1. Project identity
 
 - Project name: **Pourō-Fable5 Re**
@@ -10,36 +16,46 @@
 
 ## 2. Product purpose
 
-Pourō-Fable5 Re is a quiet brew guide intended to reduce mental arithmetic, next-step decisions, cumulative-water checks, Switch-operation mistakes, and friction when reusing brewing conditions.
+Pourō-Fable5 Re is a quiet, local-first brew guide that reduces mental arithmetic, next-step
+decisions, cumulative-water checks, Switch-operation mistakes, and friction when reusing
+brewing conditions. Primary users are beginners through intermediate users practicing approved
+brewing variants. Detailed feature scope is governed by the Feature Scope Authority.
 
-Primary users are beginners through intermediate users practicing approved variants of the 4:6 Method, Hybrid brewing, 10 Pour / NEO, and Ice Brew, including users who want to scale an approved recipe to a supported coffee dose without using a complex analysis platform.
-
-## 3. Core direction
-
-- Local-first operation
-- No account, backend, or cloud synchronization
-- Installable PWA with an offline App Shell
-- Portrait-first mobile interface
-- Method selection as the primary entry point
-- Explicit History saving; timer completion does not save automatically
-- History as completed brew records
-- My Recipes as reusable setup presets
-- Quiet, premium, research-notebook, tool-like presentation
-
-## 4. Out of Scope
+## 3. High-level Out of Scope
 
 The project does not include:
 
 - accounts, mandatory backend services, or cloud sync
-- social networking, community features, recipe marketplace, payments, subscriptions, or advertising
+- social, community, marketplace, payments, subscriptions, or advertising
 - automatic modification of Recipe Truth by an AI system
 - measured or guaranteed TDS or extraction yield
-- claims that the product is official, approved, supervised, endorsed, or a complete reproduction
-- CSV import in the initial release
+- claims of being official, approved, supervised, endorsed, or a complete reproduction
 
-## 5. Approved technical stack
+Detailed inclusion and exclusion lists are governed by the Feature Scope Authority.
 
-The following architecture was approved by Human decision on 2026-06-19:
+## 4. Repository identity
+
+```yaml
+repository: NS-del346/Pouro-Fable5-Re
+visibility: public
+default_branch: main
+license: MIT
+copyright_holder: Shunsuke Nagano
+hosting: GitHub Pages
+pages_project_path: /Pouro-Fable5-Re/
+custom_domain: not_required_for_initial_release
+```
+
+GitHub Pages is an approved hosting direction but remains unconfigured. Enabling Pages and
+performing a Production deployment require a separate Human Gate. The MIT License applies to
+repository-owned software and documentation; it does not automatically license third-party
+assets, fonts, trademarks, recipe sources, or quoted material. Detailed legal, attribution,
+and NOTICE rules are governed by the Legal / Sources Authority.
+
+## 5. Approved baseline direction (reference record)
+
+The following directions were approved by Human decision on 2026-06-19 and are recorded here
+as direction only. PR-000A does not install the runtime stack, dependencies, or any runtime.
 
 ```yaml
 framework: React 19.2
@@ -57,87 +73,21 @@ account: none
 cloud_sync: none
 ```
 
-This charter records the decision only. PR-000A does not install the runtime stack or dependencies.
+Concrete dependency installation steps, exact configuration files, Storage namespaces and
+schemas, PWA/Service Worker details, UI structure and terminology, and Backup/Export/Import
+formats are deferred to their dedicated Authorities (see
+[docs/SOURCE_OF_TRUTH_INDEX.md](SOURCE_OF_TRUTH_INDEX.md)). This charter does not duplicate
+those specifications.
 
-## 6. Repository, licensing, and hosting
+## 6. Recipe direction (reference record)
 
-```yaml
-repository: NS-del346/Pouro-Fable5-Re
-visibility: public
-default_branch: main
-license: MIT
-copyright_holder: Shunsuke Nagano
-hosting: GitHub Pages
-pages_project_path: /Pouro-Fable5-Re/
-custom_domain: not_required_for_initial_release
-```
+Initial implementation direction covers the 4:6 Method and approved variants, Classic Hybrid,
+New Hybrid, 10 Pour / NEO, and Ice Brew / rapid-chill 4:6. Exact recipe values, ratios, steps,
+temperatures, Switch states, New Hybrid Recipe Truth, source evidence, and implementation
+eligibility are governed by the Recipe Truth Authority under its Human Gate. PR-000A does not
+copy or implement recipe data.
 
-GitHub Pages is an approved hosting direction but remains unconfigured. Enabling Pages and performing a Production deployment require a separate Human Gate.
-
-The MIT License applies to repository-owned software and documentation. It does not automatically license third-party assets, fonts, trademarks, recipe sources, or quoted material.
-
-## 7. Initial release functional boundary
-
-Approved initial-release product scope includes:
-
-- Home and method selection
-- Recipe Setup and Preview
-- Active Brew / Timer
-- Finish / Brew Log
-- explicit Save to History
-- History, History Detail, and Rebrew
-- My Recipes as setup presets
-- Settings, source information, and notices
-- local-first storage
-- PWA and offline foundation
-- approved backup, export, and import capabilities
-
-These are product requirements, not claims that the functions are currently implemented.
-
-## 8. Initial Recipe scope
-
-The initial implementation scope is approved for:
-
-- 4:6 Method and approved variants
-- Classic Hybrid
-- New Hybrid
-- 10 Pour / NEO
-- Ice Brew / rapid-chill 4:6
-
-Exact recipe values, steps, ratios, temperatures, Switch states, source evidence, and implementation eligibility remain governed by the Recipe Truth authority. PR-000A does not copy or implement recipe data.
-
-## 9. Backup, Export, and Import
-
-The initial release must include:
-
-- History CSV export
-- full JSON backup
-- JSON import validation
-- import preview
-- automatic pre-import backup
-- Merge and Replace modes
-- destructive Replace confirmation
-- read-back verification
-- rollback handling
-- offline/local execution without external data transmission
-
-CSV import is Out of Scope.
-
-## 10. Local data namespace
-
-Approved namespace direction:
-
-```text
-pouroFable5Re.history.v1
-pouroFable5Re.myRecipes.v1
-pouroFable5Re.settings.v1
-pouroFable5Re.activeBrew.v1
-pouroFable5Re.lastSetup.v1
-```
-
-Old-project keys must not be reused directly. Migration or import must be explicit, and `localStorage.clear()` is prohibited.
-
-## 11. Human Gate domains
+## 7. Human Gate domains
 
 Human approval is required for:
 
@@ -151,9 +101,10 @@ Human approval is required for:
 - Completion Contract changes
 - repository visibility, Pages, Production deployment, and release
 
-Approved specifications may be transcribed or mechanically validated within an explicit PR contract, but unresolved Human Gate domains fail closed.
+Approved specifications may be transcribed or mechanically validated within an explicit PR
+contract, but unresolved Human Gate domains fail closed.
 
-## 12. Lifecycle Authority
+## 8. Lifecycle Authority
 
 ### Before PR-000A merge
 
@@ -162,29 +113,53 @@ Approved specifications may be transcribed or mechanically validated within an e
 
 ### After PR-000A merge
 
-- GitHub becomes the authority for code, runtime, PR state, QA evidence, release state, and Current Status.
-- Google Drive remains the authority for research, external evidence, pre-decision context, and long-term planning context until a domain is intentionally migrated.
+- GitHub becomes the authority for code, runtime, PR state, QA evidence, release state, and
+  Current Status.
+- Google Drive remains the authority for research, external evidence, pre-decision context, and
+  long-term planning context until a domain is intentionally migrated.
 - The same complete specification must not be maintained independently in both locations.
 
 Repository state always follows verified GitHub data.
 
-## 13. Merge and Production deployment
+## 9. Merge and Production deployment
 
-PR merge, main integration, release-candidate creation, release approval, tag or GitHub Release creation, Production deployment, and post-deploy smoke testing are separate lifecycle events.
+PR merge, main integration, release-candidate creation, release approval, tag or GitHub Release
+creation, Production deployment, and post-deploy smoke testing are separate lifecycle events.
+Merging to `main` must not automatically publish Production. Production deployment requires an
+approved release target and Human authorization.
 
-Merging to `main` must not automatically publish Production. Production deployment requires an approved release target and Human authorization.
+## 10. Governance prerequisite and runtime status
 
-## 14. Decision Pending
+Runtime is not implemented. PR-000A is docs-only and does not create a usable application.
+Runtime implementation begins only through later PRs after governance, domain authorities,
+required checks, and Human Gates are explicitly satisfied.
 
-The following remain unresolved and must not be inferred:
+## 11. Human approval record
 
-- Minimal Brew Feedback schema
-- sound and haptic initial scope
-- final branch-protection and ruleset configuration
-- detailed CI checks and workflow design
-- Production release approval and timing
-- future adoption of a custom domain
+```yaml
+approval_record:
+  approval_id: HUMAN-2026-06-19-GOV-001
+  approver: Shunsuke Nagano
+  approval_date: 2026-06-19
+  approval_channel: ChatGPT project conversation
+  approved_directions:
+    - technical configuration direction
+    - public repository
+    - MIT license
+    - GitHub Pages hosting direction
+    - initial Recipe dataset direction
+    - Export and Import inclusion in initial release
+    - New Hybrid Recipe Truth direction
+  limitations:
+    - does not authorize runtime implementation
+    - does not authorize dependency installation
+    - does not authorize Pages enablement
+    - does not authorize Production deployment
+    - does not authorize PR merge
+    - does not replace domain-specific Recipe Truth
+```
 
-## 15. Governance prerequisite
-
-Runtime implementation begins only through later PRs after governance, domain authorities, required checks, and Human Gates are explicitly satisfied. PR-000A is docs-only and does not create a usable application.
+This approval is a **direction approval only**. It does not authorize the current head SHA, any
+PR merge, runtime implementation, or Production deployment, and it does not replace
+domain-specific Authorities such as Recipe Truth. Each merge and lifecycle gate must still be
+satisfied independently for the current head SHA.

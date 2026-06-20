@@ -2,6 +2,27 @@
 
 Last verified: 2026-06-19
 
+This document is a historical snapshot and handoff aid. It is not the live authority for
+repository, pull request, or gate state.
+
+```yaml
+status_authority:
+  live_repository_state: GitHub repository metadata
+  live_pr_state: GitHub pull request metadata
+  live_gate_state: SHA-bound GitHub PR evidence
+  document_role: historical_snapshot_and_handoff
+```
+
+Snapshot rules:
+
+- This document must not transcribe `PASS` / `FAIL` results each time a gate result changes.
+  Live gate results are read from GitHub PR comments, reviews, checks, and other SHA-bound
+  evidence.
+- Updating this document must not be used to change the PR head SHA, because doing so would
+  invalidate prior verification bound to the previous head SHA.
+- In-document state must never be treated as higher authority than GitHub PR metadata. When the
+  two differ, GitHub PR metadata governs.
+
 ```yaml
 project: Pourō-Fable5 Re
 phase: governance_foundation
@@ -33,6 +54,29 @@ runtime:
 ```
 
 The current PR head SHA must be read from GitHub PR metadata. A document cannot embed the SHA of the commit that contains itself without immediately making that value stale. The recorded SHA above is the verified head at Draft PR creation; the PR description records the current post-metadata head.
+
+## Historical gate results
+
+These are recorded as history only. They are bound to the head SHA shown and are **not** the
+current gate results for any new head SHA. The latest Intent Review, Independent Verification,
+External Audit, and Human Gate must be confirmed from GitHub PR comments, reviews, checks, or
+other SHA-bound evidence for the current head SHA.
+
+```yaml
+historical_gate_results:
+  independent_verification:
+    id: PR-000A-IV-001
+    head_sha: ed636a7f4a7405aa93714e9b0168be57c1622cf3
+    result: blocked
+  external_audit:
+    id: PR-000A-EA-001
+    head_sha: ed636a7f4a7405aa93714e9b0168be57c1622cf3
+    result: fail
+```
+
+A new head SHA invalidates these results. Remediation that changes the head SHA requires new
+Intent Review, Independent Verification, and External Audit bound to the new head SHA, each
+under a new evidence ID.
 
 ## Context and governance
 

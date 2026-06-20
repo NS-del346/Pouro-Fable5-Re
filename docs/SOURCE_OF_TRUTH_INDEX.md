@@ -11,6 +11,7 @@ Google Drive context root:
 ## 2. Global rules
 
 - Current user instructions take priority within their authorized scope.
+- `docs/PROJECT_CHARTER.md` is a high-level Project and Lifecycle Charter. It is not a detailed domain specification, and it does not override the dedicated domain Authorities listed below.
 - Repository, branch, commit, pull request, diff, check, and merge state come from verified GitHub data.
 - Before PR-000A merge, Google Drive is the approved planning authority.
 - After PR-000A merge, GitHub is the authority for code, runtime, PR state, QA evidence, release state, and `docs/CURRENT_STATUS.md`.
@@ -166,3 +167,42 @@ Search results may include copied, archived, backed-up, or superseded files. The
 - the active 00 Context Index identifies a newer authority
 
 Archive material may be used only for historical comparison and must not independently authorize implementation or merge.
+
+## 6. Charter scope and domain authority precedence
+
+`docs/PROJECT_CHARTER.md` records project identity, lifecycle authority, Human Gate domains,
+and approved baseline directions. It is **not** a detailed domain specification. For the
+following domains, the dedicated Authority takes precedence over any direction recorded in the
+charter:
+
+- Feature Scope
+- Recipe Truth
+- Storage / Data Model
+- Backup / Export / Import
+- UI / UX
+- PWA / Deployment
+- QA
+- Release
+- Legal / Sources
+
+## 7. Authority migration
+
+Merging PR-000A alone does not automatically migrate these domains from Google Drive to GitHub.
+Each domain remains under its current Active Authority until it is intentionally migrated by a
+separate, reviewed PR. A domain Authority migration requires at least the following record:
+
+```yaml
+authority_migration:
+  domain:
+  source_authority:
+  destination_authority:
+  approval_id:
+  migration_pr:
+  approved_head_sha:
+  superseded_source:
+  effective_after_merge:
+```
+
+Domains that have not been explicitly migrated retain their Google Drive Active Authority.
+Files marked Archive, Backup, Copy, `のコピー`, or Superseded must never be treated as Active
+Authority, and must not be used as a migration source or destination authority.

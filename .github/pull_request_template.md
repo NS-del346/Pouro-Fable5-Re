@@ -69,7 +69,11 @@ intent_review_required: unresolved
 result: not_run
 reviewer: null
 evidence: null
+reviewed_head_sha: null
+blockers: []
 ```
+
+When Intent Review is required, merge requires a `PASS` bound to the current head SHA. A result tied to any prior head SHA does not satisfy this gate.
 
 ## External Audit
 
@@ -80,6 +84,8 @@ result: not_run
 audited_head_sha: null
 blockers: []
 ```
+
+When External Audit is required, merge requires a `PASS` bound to the current head SHA. "Complete" or "in progress" does not satisfy this gate; only a `PASS` whose `audited_head_sha` equals the current head SHA qualifies.
 
 ## Changes
 
@@ -163,13 +169,33 @@ Claude Codeで利用可能な最新のSonnetクラス。開始時に実際のモ
 
 ## Merge control
 
-- [ ] All required checks are PASS or justified N/A
-- [ ] Independent Verification is PASS for the current head SHA
-- [ ] External Audit is complete when required
-- [ ] Human Gate is explicitly satisfied when required
+Merge is permitted only when every applicable gate below is independently satisfied for the current head SHA.
+
+- [ ] All Required Checks are `PASS` or justified `N/A`
+- [ ] Independent Verification is `PASS` for the current head SHA
+- [ ] Intent Review is `PASS` for the current head SHA when required
+- [ ] External Audit is `PASS` for the current head SHA when required
+- [ ] Human Gate is explicitly approved for the current head SHA when required
 - [ ] No unresolved blocking review thread remains
 - [ ] PR description and Current Status are consistent
 - [ ] Production deployment is not implied by merge
+
+Gate independence:
+
+- Each gate is mutually non-substitutable. A `PASS` for one gate does not satisfy any other gate.
+- Independent Verification, Intent Review, External Audit, and the Human Gate are separate requirements and must each be satisfied on their own terms.
+
+Fail-closed rule — merge is prohibited if any applicable gate is in any of the following states:
+
+- `FAIL`
+- `BLOCKED`
+- `NOT_RUN`
+- `UNRESOLVED`
+- bound to a head SHA that does not match the current head SHA (head SHA mismatch)
+- missing required evidence
+- any unresolved blocker remains
+
+`PASS WITH FINDINGS` is not treated as mergeable unless an explicit, documented allowance rule for the specific findings exists; absent such a rule it is handled as not satisfied.
 
 ```yaml
 auto_merge: false
