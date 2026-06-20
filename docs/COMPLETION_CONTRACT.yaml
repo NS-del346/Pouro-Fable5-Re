@@ -1,0 +1,71 @@
+schema_version: 1
+project: Pourō-Fable5 Re
+release_status: not_applicable
+
+contract_state:
+  mode: fail_closed
+  unresolved_values_block_automatic_progress: true
+
+pipeline:
+  runtime_status: not_installed
+  auto_merge_enabled: false
+  write_lane_status: disabled
+
+requirements:
+  project_charter: required
+  current_status: required
+  source_of_truth_index: required
+  pr_backlog: required
+  completion_contract: required
+  pull_request_template: required
+  license_copyright: required
+
+pr_000a:
+  required_result: draft_pr_only
+  merge_allowed_by_this_contract: false
+  independent_verification: required
+  external_audit: required
+  intent_review: required
+  human_gate: required
+
+release_blockers:
+  open_p0: unresolved
+  release_blocking_p1: unresolved
+
+issue_severity_policy:
+  open_p0_count: unknown
+  open_p1_count: unknown
+  release_blocking_p1_count: unknown
+  p1_classification_rule: >-
+    A P1 issue blocks a release only when it is classified as release-blocking
+    for that release. The existence of any P1 issue and release-blocker status
+    are tracked separately.
+  deferred_p1_requires:
+    - human_approval
+    - documented_reason
+    - target_release
+    - mitigation_or_workaround
+
+human_gates:
+  governance_foundation: required
+  completion_contract_change: required
+  recipe_truth: required
+  legal_and_attribution: required
+  destructive_data_operation: required
+  pages_enablement: required
+  production_release: required
+
+repository_state:
+  runtime_app: not_implemented
+  github_actions: not_installed
+  pages: not_configured
+  branch_protection: not_configured
+  production_release: not_applicable
+
+completion_rules:
+  backlog_empty_is_sufficient: false
+  unresolved_human_gate_defaults_to_approved: false
+  missing_check_defaults_to_pass: false
+  not_applicable_check_requires_reason: true
+  head_sha_change_invalidates_verification: true
+  source_of_truth_change_invalidates_verification: true

@@ -1,0 +1,59 @@
+schema_version: 1
+project: Pourō-Fable5 Re
+current_pr: PR-000A
+
+status_values:
+  - in_progress
+  - planned
+  - blocked
+  - merged
+  - cancelled
+
+prs:
+  - id: PR-000A
+    title: Governance Foundation
+    status: in_progress
+    risk: governance
+    human_gate: required
+    intent_review: required
+    external_audit: required
+    auto_merge: false
+    depends_on: []
+    goal: Establish the initial GitHub governance authority without runtime implementation.
+
+  - id: PR-000B
+    title: Source of Truth Migration
+    status: planned
+    risk: governance
+    human_gate: required
+    auto_merge: false
+    depends_on:
+      - PR-000A
+    goal: Migrate approved domain authorities without duplicating full specifications across Drive and GitHub.
+
+  - id: PR-000C
+    title: QA and Release Governance
+    status: planned
+    risk: governance
+    human_gate: required
+    auto_merge: false
+    depends_on:
+      - PR-000A
+    goal: Define repository-native QA evidence, release, deployment, and rollback contracts.
+
+  - id: PR-002A
+    title: Repository Foundation
+    status: planned
+    risk: infrastructure
+    human_gate: required
+    auto_merge: false
+    depends_on:
+      - PR-000A
+      - PR-000B
+      - PR-000C
+    goal: Introduce the approved runtime foundation through a separate, explicitly scoped contract.
+
+planning_rules:
+  - Future PR identifiers and scope remain tentative until an explicit PR contract is approved.
+  - A planned entry does not authorize implementation, merge, Pages, or Production deployment.
+  - Dependencies, Human Gates, and protected domains must fail closed when unresolved.
