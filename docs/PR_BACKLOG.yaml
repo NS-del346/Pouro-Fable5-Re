@@ -27,6 +27,7 @@ prs:
     risk: governance
     human_gate: required
     intent_review: required
+    external_audit: required
     auto_merge: false
     depends_on:
       - PR-000A

@@ -6,7 +6,7 @@ domains:
   governance:
     domain: governance
     status: migrated_to_github
-    source_authority: "Google Drive Project Charter / governance planning context"
+    source_authority: "Pourō-Fable5 Re｜Project Charter・Lifecycle Authority｜2026-06-19"
     destination_authority: "GitHub repository governance documents"
     approval_id: PR-000A
     migration_pr: PR-000A
@@ -31,7 +31,7 @@ domains:
   recipe_truth:
     domain: recipe_truth
     status: remains_drive_authority
-    source_authority: "Pourō-Fable5 Re｜Recipe Truth・Method Data Authority"
+    source_authority: "Pourō-Fable5 Re｜Recipe Truth・Method Data Authority｜2026-06-19"
     destination_authority: null
     approval_id: null
     migration_pr: null
@@ -43,7 +43,7 @@ domains:
   legal_attribution:
     domain: legal_attribution
     status: remains_drive_authority
-    source_authority: "Pourō-Fable5 Re｜Legal・Attribution・Source Policy"
+    source_authority: "Pourō-Fable5 Re｜Legal・Attribution・Source Policy｜2026-06-19"
     destination_authority: null
     approval_id: null
     migration_pr: null
@@ -55,7 +55,7 @@ domains:
   storage_data_model:
     domain: storage_data_model
     status: remains_drive_authority
-    source_authority: "Pourō-Fable5 Re｜Storage・Data Model・Migration Authority"
+    source_authority: "Pourō-Fable5 Re｜Storage・Data Model・Migration Authority｜2026-06-19"
     destination_authority: null
     approval_id: null
     migration_pr: null
@@ -67,7 +67,7 @@ domains:
   backup_export_import:
     domain: backup_export_import
     status: remains_drive_authority
-    source_authority: "Pourō-Fable5 Re｜Backup・Export・Import Format"
+    source_authority: "Pourō-Fable5 Re｜Backup・Export・Import Format｜2026-06-19"
     destination_authority: null
     approval_id: null
     migration_pr: null
@@ -79,7 +79,7 @@ domains:
   pwa_deployment:
     domain: pwa_deployment
     status: remains_drive_authority
-    source_authority: "Pourō-Fable5 Re｜PWA・Manifest・Service Worker・Deployment Authority"
+    source_authority: "Pourō-Fable5 Re｜PWA・Manifest・Service Worker・Deployment Authority｜2026-06-19"
     destination_authority: null
     approval_id: null
     migration_pr: null
@@ -91,7 +91,7 @@ domains:
   ui_structure:
     domain: ui_structure
     status: remains_drive_authority
-    source_authority: "Pourō-Fable5 Re｜UI画面構成・Viewport Priority"
+    source_authority: "Pourō-Fable5 Re｜UI画面構成・Viewport Priority｜2026-06-19"
     destination_authority: null
     approval_id: null
     migration_pr: null
@@ -103,7 +103,7 @@ domains:
   ui_terminology:
     domain: ui_terminology
     status: remains_drive_authority
-    source_authority: "Pourō-Fable5 Re｜UI Terminology Matrix"
+    source_authority: "Pourō-Fable5 Re｜UI Terminology Matrix｜2026-06-19"
     destination_authority: null
     approval_id: null
     migration_pr: null
@@ -115,7 +115,7 @@ domains:
   qa_acceptance:
     domain: qa_acceptance
     status: remains_drive_authority
-    source_authority: "Pourō-Fable5 Re｜QA・Acceptance・Evidence Policy"
+    source_authority: "Pourō-Fable5 Re｜QA・Acceptance・Evidence Policy｜2026-06-19"
     destination_authority: null
     approval_id: null
     migration_pr: null
@@ -127,7 +127,7 @@ domains:
   release_rollback:
     domain: release_rollback
     status: remains_drive_authority
-    source_authority: "Pourō-Fable5 Re｜Release・Deployment・Rollback Policy"
+    source_authority: "Pourō-Fable5 Re｜Release・Deployment・Rollback Policy｜2026-06-19"
     destination_authority: null
     approval_id: null
     migration_pr: null
@@ -151,7 +151,7 @@ domains:
   research_reference:
     domain: research_reference
     status: remains_drive_authority
-    source_authority: "Pourō-Fable5 Re｜00 Context Index・統一運用ガイド｜2026-06-19 and associated research and external evidence in Google Drive context root"
+    source_authority: "Pourō-Fable5 Re｜00 Context Index・統一運用ガイド｜2026-06-19"
     destination_authority: null
     approval_id: null
     migration_pr: null
