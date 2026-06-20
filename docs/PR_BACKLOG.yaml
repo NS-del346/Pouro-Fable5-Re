@@ -41,6 +41,18 @@ prs:
       - PR-000A
     goal: Define repository-native QA evidence, release, deployment, and rollback contracts.
 
+  - id: PR-000D
+    title: Initial Docs Governance CI Foundation
+    status: planned
+    risk: governance_infrastructure
+    human_gate: required
+    intent_review: required
+    external_audit: required
+    auto_merge: false
+    depends_on:
+      - PR-000A
+    goal: Add the first deterministic, read-only GitHub Actions validation workflow for the docs-only Governance Repository.
+
   - id: PR-002A
     title: Repository Foundation
     status: planned
