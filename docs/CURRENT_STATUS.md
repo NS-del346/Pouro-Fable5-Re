@@ -63,7 +63,7 @@ runtime:
   app: not_implemented
   github_actions: installed
   pages: not_configured
-  branch_protection: not_configured
+  branch_protection: active_ruleset
   auto_merge: disabled
   pipeline: not_installed
   production_release: not_applicable
