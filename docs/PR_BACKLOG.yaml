@@ -1,6 +1,6 @@
 schema_version: 1
 project: Pourō-Fable5 Re
-current_pr: PR-000B
+current_pr: PR-000E
 
 status_values:
   - in_progress
@@ -23,7 +23,7 @@ prs:
 
   - id: PR-000B
     title: Source of Truth Migration
-    status: in_progress
+    status: merged
     risk: governance
     human_gate: required
     intent_review: required
@@ -76,6 +76,47 @@ prs:
     depends_on:
       - PR-000A
     goal: Add the first deterministic, read-only GitHub Actions validation workflow for the docs-only Governance Repository.
+
+  - id: PR-000E
+    title: Post-merge Status Reconciliation
+    status: in_progress
+    risk: governance
+    human_gate: required
+    intent_review: required
+    external_audit: required
+    auto_merge: false
+    depends_on:
+      - PR-000B
+      - PR-000D
+    goal: Reconcile tracked status documents with GitHub truth after PR-000B squash merge.
+    allowed_files:
+      - docs/PR_BACKLOG.yaml
+      - docs/CURRENT_STATUS.md
+    protected_files:
+      - LICENSE
+      - README.md
+      - docs/PROJECT_CHARTER.md
+      - docs/COMPLETION_CONTRACT.yaml
+      - docs/AUTHORITY_MIGRATION.yaml
+      - docs/SOURCE_OF_TRUTH_INDEX.md
+      - .github/pull_request_template.md
+      - .github/workflows/docs-governance-ci.yml
+    required_checks:
+      - docs-governance
+    risk_domains:
+      - governance
+    acceptance_criteria:
+      - PR_BACKLOG.yaml PR-000B status field equals merged
+      - PR_BACKLOG.yaml current_pr equals PR-000E
+      - PR_BACKLOG.yaml PR-000E entry exists with status in_progress
+      - CURRENT_STATUS.md Last verified equals 2026-06-22
+      - CURRENT_STATUS.md pr_000a.status equals merged and merge_performed equals true
+      - CURRENT_STATUS.md pr_000d and pr_000b records present with status merged
+      - CURRENT_STATUS.md repository block contains snapshot_main_head_sha and open_prs_at_last_verified
+      - CURRENT_STATUS.md github_actions equals installed
+      - CURRENT_STATUS.md active blockers section updated to reflect all PRs merged
+      - only docs/PR_BACKLOG.yaml and docs/CURRENT_STATUS.md are changed
+      - docs-governance CI passes
 
   - id: PR-002A
     title: Repository Foundation
