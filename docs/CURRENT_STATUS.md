@@ -1,6 +1,6 @@
 # Current Status
 
-Last verified: 2026-06-19
+Last verified: 2026-06-22
 
 This document is a historical snapshot and handoff aid. It is not the live authority for
 repository, pull request, or gate state.
@@ -32,22 +32,38 @@ repository:
   visibility: public
   default_branch: main
   initial_commit: 9229c6e6e848fdbf616f36f96cd12410e1c2cf54
+  snapshot_main_head_sha: 3211415c66e8461727a5ccfb7e6fddaee9bc20f5
+  open_prs_at_last_verified: 0
 
 pr_000a:
-  status: draft
+  status: merged
   number: 1
   url: https://github.com/NS-del346/Pouro-Fable5-Re/pull/1
   branch: pr-000a-governance-foundation
   base_sha: 9229c6e6e848fdbf616f36f96cd12410e1c2cf54
   head_sha_at_draft_creation: c6c3727801d1049bba0b57673a9cd0b6127dad46
   current_head_sha_authority: GitHub pull request metadata
-  merge_performed: false
+  merge_performed: true
+  merge_commit: f72b3125191119d2dba107069d6a418babde995b
+
+pr_000d:
+  status: merged
+  number: 2
+  merge_performed: true
+  merge_commit: a4e20c4171f5a43594789675b2b814f590a83720
+
+pr_000b:
+  status: merged
+  number: 3
+  merge_performed: true
+  merge_commit: 3211415c66e8461727a5ccfb7e6fddaee9bc20f5
+  merged_at: "2026-06-21T12:42:43Z"
 
 runtime:
   app: not_implemented
-  github_actions: not_installed
+  github_actions: installed
   pages: not_configured
-  branch_protection: not_configured
+  branch_protection: active_ruleset
   auto_merge: disabled
   pipeline: not_installed
   production_release: not_applicable
@@ -122,20 +138,19 @@ PR-000A corrects the LICENSE copyright line from `Shun` to `Shunsuke Nagano`. It
 
 ## Active blockers
 
-- PR-000A Independent Verification has not yet produced a PASS for the current head SHA.
-- PR-000A External Audit has not yet produced a PASS for the current head SHA.
-- Governance Human Gate remains required before merge.
-- Branch protection, CI, Actions, Pages, pipeline runtime, and Production release remain unconfigured.
+- PR-000A, PR-000D, and PR-000B are merged to main (main HEAD: 3211415c66e8461727a5ccfb7e6fddaee9bc20f5). No governance PRs are currently open.
+- GitHub Actions (docs-governance CI) is installed.
+- Pages, pipeline runtime, and Production release remain unconfigured.
 - Runtime, Recipe dataset, storage schema, PWA, and UI are not implemented.
 
 ## Next Human Gate
 
-Review PR-000A after Independent Verification and External Audit are bound to the current head SHA. The Human decision is whether the governance foundation may be merged. Merge and Production deployment are separate; this gate does not authorize Production.
+PR-000A, PR-000D, and PR-000B are merged. PR-000E (Post-merge Status Reconciliation) is in progress. The next Human decision is whether PR-000E may be merged after Intent Review, Independent Verification, External Audit, and docs-governance CI pass. Merge and Production deployment are separate; this gate does not authorize Production.
 
 ## Next planned PR
 
-`PR-000B: Source of Truth Migration`, dependent on PR-000A merge and its own explicit contract.
+`PR-000E: Post-merge Status Reconciliation`, dependent on PR-000B merge. PR-000C (QA and Release Governance) follows after PR-000E.
 
 ## Authority transition
 
-After PR-000A merge, this file becomes the Current Status authority on GitHub. Google Drive remains the authority for research, external evidence, pre-decision context, and long-term planning context unless a domain is intentionally migrated.
+PR-000A is merged. This file is the Current Status authority on GitHub. Google Drive remains the authority for research, external evidence, pre-decision context, and long-term planning context unless a domain is intentionally migrated.
