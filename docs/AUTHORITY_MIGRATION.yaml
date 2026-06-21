@@ -10,7 +10,7 @@ domains:
     destination_authority: "GitHub repository governance documents"
     approval_id: PR-000A
     migration_pr: PR-000A
-    approved_head_sha: ed636a7f4a7405aa93714e9b0168be57c1622cf3
+    approved_head_sha: e9c61526040407facfdaab68160b61c054c9f6f5
     effective_merge_sha: f72b3125191119d2dba107069d6a418babde995b
     superseded_source: true
     effective_after_merge: true
