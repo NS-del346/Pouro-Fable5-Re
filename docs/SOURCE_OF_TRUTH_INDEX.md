@@ -26,9 +26,10 @@ Google Drive context root:
 ### Governance
 
 ```yaml
-authority: GitHub governance documents after PR-000A merge; Google Drive approved planning authority before merge
-location: docs/PROJECT_CHARTER.md, docs/CURRENT_STATUS.md, docs/SOURCE_OF_TRUTH_INDEX.md, and the active Google Drive governance documents
-status: transition_in_progress
+authority: GitHub governance documents (live authority; PR-000A merged to main)
+location: docs/PROJECT_CHARTER.md, docs/CURRENT_STATUS.md, docs/SOURCE_OF_TRUTH_INDEX.md, docs/PR_BACKLOG.yaml, docs/COMPLETION_CONTRACT.yaml
+status: migrated_to_github
+migration_record: docs/AUTHORITY_MIGRATION.yaml
 purpose: project identity, lifecycle authority, current status, conflict rules, and governance boundaries
 ```
 
@@ -206,3 +207,10 @@ authority_migration:
 Domains that have not been explicitly migrated retain their Google Drive Active Authority.
 Files marked Archive, Backup, Copy, `のコピー`, or Superseded must never be treated as Active
 Authority, and must not be used as a migration source or destination authority.
+
+The current migration state of each domain is recorded in the
+[Authority Migration Ledger](./AUTHORITY_MIGRATION.yaml).
+Domains not recorded as `migrated_to_github` in that ledger — including Feature Scope, Recipe
+Truth, Legal / Attribution, Storage / Data Model, and all remaining Drive-governed domains —
+retain their Google Drive Active Authority. The same complete specification must not be
+maintained independently in both GitHub and Google Drive.

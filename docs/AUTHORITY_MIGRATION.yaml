@@ -1,0 +1,161 @@
+schema_version: 1
+record_type: authority_migration
+updated_by_pr: PR-000B
+
+domains:
+  governance:
+    domain: governance
+    status: migrated_to_github
+    source_authority: "Pourō-Fable5 Re｜Project Charter・Lifecycle Authority｜2026-06-19"
+    destination_authority: "GitHub repository governance documents"
+    approval_id: PR-000A
+    migration_pr: PR-000A
+    approved_head_sha: e9c61526040407facfdaab68160b61c054c9f6f5
+    effective_merge_sha: f72b3125191119d2dba107069d6a418babde995b
+    superseded_source: true
+    effective_after_merge: true
+    human_gate: required
+
+  feature_scope:
+    domain: feature_scope
+    status: remains_drive_authority
+    source_authority: "Pourō-Fable5 Re｜Feature Scope・Release Roadmap Source Context｜2026-06-19"
+    destination_authority: null
+    approval_id: null
+    migration_pr: null
+    approved_head_sha: null
+    superseded_source: false
+    effective_after_merge: false
+    human_gate: required
+
+  recipe_truth:
+    domain: recipe_truth
+    status: remains_drive_authority
+    source_authority: "Pourō-Fable5 Re｜Recipe Truth・Method Data Authority｜2026-06-19"
+    destination_authority: null
+    approval_id: null
+    migration_pr: null
+    approved_head_sha: null
+    superseded_source: false
+    effective_after_merge: false
+    human_gate: required
+
+  legal_attribution:
+    domain: legal_attribution
+    status: remains_drive_authority
+    source_authority: "Pourō-Fable5 Re｜Legal・Attribution・Source Policy｜2026-06-19"
+    destination_authority: null
+    approval_id: null
+    migration_pr: null
+    approved_head_sha: null
+    superseded_source: false
+    effective_after_merge: false
+    human_gate: required
+
+  storage_data_model:
+    domain: storage_data_model
+    status: remains_drive_authority
+    source_authority: "Pourō-Fable5 Re｜Storage・Data Model・Migration Authority｜2026-06-19"
+    destination_authority: null
+    approval_id: null
+    migration_pr: null
+    approved_head_sha: null
+    superseded_source: false
+    effective_after_merge: false
+    human_gate: required
+
+  backup_export_import:
+    domain: backup_export_import
+    status: remains_drive_authority
+    source_authority: "Pourō-Fable5 Re｜Backup・Export・Import Format｜2026-06-19"
+    destination_authority: null
+    approval_id: null
+    migration_pr: null
+    approved_head_sha: null
+    superseded_source: false
+    effective_after_merge: false
+    human_gate: required
+
+  pwa_deployment:
+    domain: pwa_deployment
+    status: remains_drive_authority
+    source_authority: "Pourō-Fable5 Re｜PWA・Manifest・Service Worker・Deployment Authority｜2026-06-19"
+    destination_authority: null
+    approval_id: null
+    migration_pr: null
+    approved_head_sha: null
+    superseded_source: false
+    effective_after_merge: false
+    human_gate: required
+
+  ui_structure:
+    domain: ui_structure
+    status: remains_drive_authority
+    source_authority: "Pourō-Fable5 Re｜UI画面構成・Viewport Priority｜2026-06-19"
+    destination_authority: null
+    approval_id: null
+    migration_pr: null
+    approved_head_sha: null
+    superseded_source: false
+    effective_after_merge: false
+    human_gate: required
+
+  ui_terminology:
+    domain: ui_terminology
+    status: remains_drive_authority
+    source_authority: "Pourō-Fable5 Re｜UI Terminology Matrix｜2026-06-19"
+    destination_authority: null
+    approval_id: null
+    migration_pr: null
+    approved_head_sha: null
+    superseded_source: false
+    effective_after_merge: false
+    human_gate: required
+
+  qa_acceptance:
+    domain: qa_acceptance
+    status: remains_drive_authority
+    source_authority: "Pourō-Fable5 Re｜QA・Acceptance・Evidence Policy｜2026-06-19"
+    destination_authority: null
+    approval_id: null
+    migration_pr: null
+    approved_head_sha: null
+    superseded_source: false
+    effective_after_merge: false
+    human_gate: required
+
+  release_rollback:
+    domain: release_rollback
+    status: remains_drive_authority
+    source_authority: "Pourō-Fable5 Re｜Release・Deployment・Rollback Policy｜2026-06-19"
+    destination_authority: null
+    approval_id: null
+    migration_pr: null
+    approved_head_sha: null
+    superseded_source: false
+    effective_after_merge: false
+    human_gate: required
+
+  pr_pipeline_policy:
+    domain: pr_pipeline_policy
+    status: remains_drive_authority
+    source_authority: "Pourō-Fable5 Re｜PR Automation Pipeline・Human Gate Policy｜2026-06-19"
+    destination_authority: null
+    approval_id: null
+    migration_pr: null
+    approved_head_sha: null
+    superseded_source: false
+    effective_after_merge: false
+    human_gate: required
+
+  research_reference:
+    domain: research_reference
+    status: remains_drive_authority
+    source_authority: "Pourō-Fable5 Re｜00 Context Index・統一運用ガイド｜2026-06-19"
+    destination_authority: null
+    approval_id: null
+    migration_pr: null
+    approved_head_sha: null
+    superseded_source: false
+    effective_after_merge: false
+    human_gate: required

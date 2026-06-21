@@ -1,6 +1,6 @@
 schema_version: 1
 project: Pourō-Fable5 Re
-current_pr: PR-000A
+current_pr: PR-000B
 
 status_values:
   - in_progress
@@ -12,7 +12,7 @@ status_values:
 prs:
   - id: PR-000A
     title: Governance Foundation
-    status: in_progress
+    status: merged
     risk: governance
     human_gate: required
     intent_review: required
@@ -23,13 +23,37 @@ prs:
 
   - id: PR-000B
     title: Source of Truth Migration
-    status: planned
+    status: in_progress
     risk: governance
     human_gate: required
+    intent_review: required
+    external_audit: required
     auto_merge: false
     depends_on:
       - PR-000A
     goal: Migrate approved domain authorities without duplicating full specifications across Drive and GitHub.
+    allowed_files:
+      - docs/PR_BACKLOG.yaml
+      - docs/SOURCE_OF_TRUTH_INDEX.md
+      - docs/AUTHORITY_MIGRATION.yaml
+    protected_files:
+      - LICENSE
+      - README.md
+      - docs/PROJECT_CHARTER.md
+      - docs/CURRENT_STATUS.md
+      - docs/COMPLETION_CONTRACT.yaml
+      - .github/pull_request_template.md
+      - .github/workflows/docs-governance-ci.yml
+    required_checks:
+      - docs-governance
+    risk_domains:
+      - governance
+    acceptance_criteria:
+      - authority migration ledger exists and parses as YAML
+      - governance is recorded as migrated to GitHub
+      - unmigrated domains remain Drive authority
+      - no domain specification body is duplicated
+      - only approved files are changed
 
   - id: PR-000C
     title: QA and Release Governance
@@ -43,7 +67,7 @@ prs:
 
   - id: PR-000D
     title: Initial Docs Governance CI Foundation
-    status: planned
+    status: merged
     risk: governance_infrastructure
     human_gate: required
     intent_review: required
