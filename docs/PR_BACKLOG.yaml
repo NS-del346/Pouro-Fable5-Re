@@ -1,6 +1,6 @@
 schema_version: 1
 project: Pourō-Fable5 Re
-current_pr: PR-000E
+current_pr: ~
 
 status_values:
   - in_progress
@@ -79,7 +79,7 @@ prs:
 
   - id: PR-000E
     title: Post-merge Status Reconciliation
-    status: in_progress
+    status: merged
     risk: governance
     human_gate: required
     intent_review: required
