@@ -1,6 +1,6 @@
 schema_version: 1
 project: Pourō-Fable5 Re
-current_pr: ~
+current_pr: PR-000C
 
 status_values:
   - in_progress
@@ -57,10 +57,23 @@ prs:
 
   - id: PR-000C
     title: QA and Release Governance
-    status: planned
+    status: in_progress
     risk: governance
     human_gate: required
     auto_merge: false
+    intent_review: required
+    external_audit: required
+    acceptance_criteria:
+      - QA evidence contract exists and strictly parses
+      - Release contract exists and strictly parses
+      - Exact Drive authority titles and file IDs are recorded
+      - No authority migration is performed
+      - No runtime or workflow changes
+      - Protected files remain unchanged
+      - docs-governance passes
+      - Intent Review passes
+      - Independent Verification passes
+      - External Audit has no blocking finding
     depends_on:
       - PR-000A
     goal: Define repository-native QA evidence, release, deployment, and rollback contracts.

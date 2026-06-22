@@ -32,7 +32,7 @@ repository:
   visibility: public
   default_branch: main
   initial_commit: 9229c6e6e848fdbf616f36f96cd12410e1c2cf54
-  snapshot_main_head_sha: 49ccda4f9d2dd8b34da4f4ba227f45e9b5d1de19
+  snapshot_main_head_sha: c70228a506a59905b51934cb2e966d96058f7ff3
   open_prs_at_last_verified: 0
 
 pr_000a:
@@ -65,6 +65,10 @@ pr_000e:
   merge_performed: true
   merge_commit: 49ccda4f9d2dd8b34da4f4ba227f45e9b5d1de19
   merged_at: "2026-06-21T22:05:18Z"
+
+pr_000c_in_progress:
+  status: in_progress
+  type: docs_only_governance
 
 runtime:
   app: not_implemented
@@ -145,18 +149,18 @@ PR-000A corrects the LICENSE copyright line from `Shun` to `Shunsuke Nagano`. It
 
 ## Active blockers
 
-- PR-000A, PR-000D, PR-000B, and PR-000E are merged. The recorded status snapshot is based on main commit `49ccda4f9d2dd8b34da4f4ba227f45e9b5d1de19`. No governance PRs were open when this snapshot was verified.
+- PR-000A, PR-000D, PR-000B, PR-000E, and PR-000F are merged. PR-000C (QA and Release Governance) is in progress.
 - GitHub Actions (docs-governance CI) is installed.
 - Pages, pipeline runtime, and Production release remain unconfigured.
 - Runtime, Recipe dataset, storage schema, PWA, and UI are not implemented.
 
 ## Next Human Gate
 
-PR-000A, PR-000D, PR-000B, and PR-000E are merged. The next Human decision is the PR-000C (QA and Release Governance) contract approval and subsequent gate sequence. Merge and Production deployment are separate; this gate does not authorize Production.
+PR-000C is in progress. The next Human decision is the PR-000C implementation gate sequence. Merge and Production deployment are separate; this gate does not authorize Production.
 
 ## Next planned PR
 
-`PR-000C: QA and Release Governance`. Its declared dependency, PR-000A, is merged. PR-000B and PR-000E are also merged, and no open governance PR currently blocks contract preparation.
+PR-000C: QA and Release Governance. Its declared dependency, PR-000A, is merged.
 
 ## Authority transition
 
