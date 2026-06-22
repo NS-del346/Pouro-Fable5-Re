@@ -32,7 +32,7 @@ repository:
   visibility: public
   default_branch: main
   initial_commit: 9229c6e6e848fdbf616f36f96cd12410e1c2cf54
-  snapshot_main_head_sha: 3211415c66e8461727a5ccfb7e6fddaee9bc20f5
+  snapshot_main_head_sha: 49ccda4f9d2dd8b34da4f4ba227f45e9b5d1de19
   open_prs_at_last_verified: 0
 
 pr_000a:
@@ -58,6 +58,13 @@ pr_000b:
   merge_performed: true
   merge_commit: 3211415c66e8461727a5ccfb7e6fddaee9bc20f5
   merged_at: "2026-06-21T12:42:43Z"
+
+pr_000e:
+  status: merged
+  number: 4
+  merge_performed: true
+  merge_commit: 49ccda4f9d2dd8b34da4f4ba227f45e9b5d1de19
+  merged_at: "2026-06-21T22:05:18Z"
 
 runtime:
   app: not_implemented
@@ -138,18 +145,18 @@ PR-000A corrects the LICENSE copyright line from `Shun` to `Shunsuke Nagano`. It
 
 ## Active blockers
 
-- PR-000A, PR-000D, and PR-000B are merged to main (main HEAD: 3211415c66e8461727a5ccfb7e6fddaee9bc20f5). No governance PRs are currently open.
+- PR-000A, PR-000D, PR-000B, and PR-000E are merged. The recorded status snapshot is based on main commit `49ccda4f9d2dd8b34da4f4ba227f45e9b5d1de19`. No governance PRs were open when this snapshot was verified.
 - GitHub Actions (docs-governance CI) is installed.
 - Pages, pipeline runtime, and Production release remain unconfigured.
 - Runtime, Recipe dataset, storage schema, PWA, and UI are not implemented.
 
 ## Next Human Gate
 
-PR-000A, PR-000D, and PR-000B are merged. PR-000E (Post-merge Status Reconciliation) is in progress. The next Human decision is whether PR-000E may be merged after Intent Review, Independent Verification, External Audit, and docs-governance CI pass. Merge and Production deployment are separate; this gate does not authorize Production.
+PR-000A, PR-000D, PR-000B, and PR-000E are merged. The next Human decision is the PR-000C (QA and Release Governance) contract approval and subsequent gate sequence. Merge and Production deployment are separate; this gate does not authorize Production.
 
 ## Next planned PR
 
-`PR-000E: Post-merge Status Reconciliation`, dependent on PR-000B merge. PR-000C (QA and Release Governance) follows after PR-000E.
+`PR-000C: QA and Release Governance`. Its declared dependency, PR-000A, is merged. PR-000B and PR-000E are also merged, and no open governance PR currently blocks contract preparation.
 
 ## Authority transition
 
