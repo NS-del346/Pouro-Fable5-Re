@@ -1,0 +1,106 @@
+schema_version: 1
+contract:
+  id: PR-000C-QA-EVIDENCE
+  source_pr: PR-000C
+  contract_revision: PR-000C-CONTRACT-R2
+  status: active_policy_runtime_not_installed
+
+authority:
+  drive_source_title: "Pourō-Fable5 Re｜QA・Acceptance・Evidence Policy｜2026-06-19"
+  drive_source_file_id: 1w9xNBx1NfAXCJQ90eA6Gc1-PK20KX7ytG-HWWx8cWEc
+  authority_status: Active / QA and acceptance authority
+  repository_contract_role: repository_native_governance_contract
+  domain_migrated: false
+
+core_principles:
+  self_report_alone_is_insufficient: true
+  evidence_must_bind_to:
+    - head_sha
+    - build_or_artifact
+    - context_revisions
+  invalidation_triggers:
+    - head_sha_changed
+    - changed_files_changed
+    - acceptance_criteria_changed
+    - required_checks_changed
+    - source_of_truth_revision_changed
+  n_a_requires_reason: true
+
+qa_layers:
+  - static_validation
+  - unit_tests
+  - integration_tests
+  - browser_e2e
+  - visual_review
+  - accessibility
+  - data_migration
+  - pwa_offline_update
+  - recipe_truth_source_legal
+  - human_device_qa
+  - post_deploy_smoke
+
+check_selection:
+  scope_specific: true
+  fixed_build_lint_typecheck_test_for_every_pr: false
+  docs_only_candidates:
+    - changed_files
+    - document_links
+    - forbidden_wording
+    - authority_references
+    - structural_validation
+
+evidence_record_schema:
+  required_fields:
+    - evidence_id
+    - repository
+    - pr_number
+    - head_sha
+    - base_sha
+    - build_or_artifact
+    - context_revisions
+    - device
+    - os
+    - browser_or_standalone
+    - viewport
+    - tested_at
+    - tester
+    - scenario
+    - result
+    - evidence_link
+    - known_limitations
+  allowed_results:
+    - pass
+    - fail
+    - blocked
+    - n_a
+
+evidence_reuse:
+  human_device_evidence_reusable_across_sha: false
+
+release_candidate_acceptance_reference:
+  required_prs_merged: required
+  open_p0_release_blockers: 0
+  open_p1_release_blockers: 0
+  deferred_p1_requires_human_approval: true
+  build_and_checks: pass
+  recipe_truth_audit: pass
+  legal_source_audit: pass
+  storage_migration_qa: pass
+  iphone_15_plus_qa: pass
+  iphone_se_timer_qa: pass
+  pwa_install_qa: pass
+  safari_device_qa: pass
+  release_approval: human_required
+
+current_applicability:
+  runtime_implemented: false
+  device_qa_currently_applicable: false
+  pwa_qa_currently_applicable: false
+  post_deploy_smoke_currently_applicable: false
+
+authorization:
+  auto_merge: false
+  merge_authorized: false
+  production_authorized: false
+  production_deploy_authorized: false
+  pages_enablement_authorized: false

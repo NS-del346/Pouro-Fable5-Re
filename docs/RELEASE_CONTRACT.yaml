@@ -1,0 +1,165 @@
+schema_version: 1
+contract:
+  id: PR-000C-RELEASE
+  source_pr: PR-000C
+  contract_revision: PR-000C-CONTRACT-R2
+  status: active_policy_release_not_applicable
+
+authority:
+  drive_source_title: "Pourō-Fable5 Re｜Release・Deployment・Rollback Policy｜2026-06-19"
+  drive_source_file_id: 1jZq1YiR4cgcJIAzuKYkCj0SnNudF727WoUt8OLbpTVw
+  authority_status: Active / Release authority
+  repository_contract_role: repository_native_governance_contract
+  domain_migrated: false
+
+lifecycle_separation:
+  - pr_merge
+  - main_integration
+  - release_candidate
+  - human_release_approval
+  - tag_and_github_release
+  - production_deployment
+  - post_deploy_smoke
+
+versioning:
+  model: semver_candidate
+  first_public_release:
+    candidate: v1.0.0
+    final_decision: human_required_after_completion_contract
+  release_candidate_format_example: v1.0.0-rc.1
+  rc_is_production_latest: false
+  commit_and_artifact_fixed_per_rc: true
+
+release_candidate_entry:
+  required_prs_merged: true
+  current_status_ready: true
+  open_p0_release_blockers: 0
+  open_p1_release_blockers: 0
+  deferred_p1_documented_and_human_approved: true
+  required_automated_checks: pass
+  recipe_truth_audit: pass
+  legal_source_audit: pass
+  storage_migration_qa: pass
+  iphone_15_plus_qa: pass
+  iphone_se_timer_qa: pass
+  pwa_install_safari_evidence: required
+  release_notes_draft: required
+  notice_and_license_review: required
+
+release_approval_record_schema:
+  required_fields:
+    - approval_id
+    - release_candidate
+    - commit_sha
+    - artifact_id
+    - approver
+    - approved_at
+    - qa_evidence
+    - known_limitations
+    - deferred_items
+    - deployment_target
+    - decision
+  allowed_decisions:
+    - approve
+    - reject
+    - hold
+
+approval_invalidation:
+  - commit_changed
+  - artifact_changed
+  - manifest_changed
+  - service_worker_changed
+  - data_schema_changed
+
+artifact_integrity:
+  clean_checkout_build: required
+  lockfile: required
+  minimal_workflow_permissions: required
+  immutable_action_sha_pinning: preferred
+  excluded_from_artifact:
+    - source_research
+    - private_docs
+    - secrets
+    - unused_assets
+  record:
+    - file_list
+    - size
+    - hash
+  build_output_matches_tag_target_sha: required
+
+github_release:
+  required:
+    - traceable_tag
+    - target_commit_sha
+    - release_title
+    - release_notes
+    - known_limitations
+    - migration_note
+    - data_backup_recommendation_where_relevant
+    - explicit_draft_prerelease_latest_flags
+
+deployment:
+  allowed_triggers:
+    - approved_tag
+    - published_github_release
+    - manual_dispatch_after_approval
+    - protected_environment_approval
+  prohibited_triggers:
+    - unconditional_deploy_on_every_main_push
+    - untrusted_branch
+    - pull_request_event
+    - secrets_exposed_to_fork_pr
+  deployment_record_fields:
+    - environment
+    - url
+    - release_or_tag
+    - commit_sha
+    - artifact
+    - workflow_run
+    - deployed_at
+    - approver
+
+rollback:
+  triggers:
+    - p0_or_p1_release_blocker
+    - app_cannot_start
+    - timer_primary_operation_failure
+    - critical_recipe_truth_regression
+    - data_loss_or_schema_corruption
+    - service_worker_loop_or_stale_app_lock
+    - secret_or_private_asset_exposure
+    - severe_legal_or_attribution_issue
+    - artifact_and_approved_sha_mismatch
+  method_priority:
+    - deploy_previous_known_good_artifact
+    - merge_revert_pr_and_deploy_patch
+    - approved_safe_feature_disable
+    - temporarily_suspend_public_deployment
+  prohibited:
+    - force_rewrite_main_history
+    - silent_data_deletion
+    - unapproved_direct_production_hotfix
+  incident_follow_up_required: true
+
+emergency_release:
+  may_not_skip:
+    - fixed_scope
+    - expected_head_sha
+    - minimal_required_checks
+    - independent_verification
+    - human_release_approval
+    - rollback_plan
+    - post_deploy_smoke
+
+current_state:
+  runtime_implemented: false
+  release_pipeline_installed: false
+  production_environment_configured: false
+  current_release: ~
+
+authorization:
+  auto_merge: false
+  merge_authorized: false
+  production_authorized: false
+  production_deploy_authorized: false
+  pages_enablement_authorized: false
